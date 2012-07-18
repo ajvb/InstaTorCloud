@@ -21,7 +21,6 @@ from os import path
 import sys
 
 import boto
-import requests
 
 from args import Args
 
@@ -170,3 +169,6 @@ if __name__ == '__main__':
         print "ID:", instance.id
         print "Region:", instance.region
         print "DNS name:", instance.dns_name
+    else:
+        print "something went horribly wrong....."
+        sys.exit(1)
