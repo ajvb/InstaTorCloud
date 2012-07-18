@@ -1,12 +1,12 @@
 import argparse
 
 
-parser = argparse.ArgumentParser(description='''InstaTorNode -- Get a
-                                     Tor Node running on an EC2 instance in
-                                     one line.''')
+parser = argparse.ArgumentParser(description='''InstaTorCloud -- Get a
+                                     Tor Bridge running on an EC2 instance in
+                                     a single command.''')
 
 parser.add_argument('-v', '--version', action='version',
-                     version='InstaTorNode v0.1')
+                     version='InstaTorCloud v0.1')
 
 parser.add_argument('--access-key-id', '-akid', action='store', dest='akid',
                     help='''Where you must insert your AWS Access Key ID.

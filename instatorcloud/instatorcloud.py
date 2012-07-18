@@ -1,4 +1,4 @@
-#   InstaTorNode
+#   InstaTorCloud
 #   Orginal Author: AJ Bahnken / aj@ajvb.me
 #   Maintained by The Cloak Project / thecloakproject.org
 #
