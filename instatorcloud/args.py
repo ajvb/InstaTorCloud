@@ -1,7 +1,7 @@
 import argparse
 
 
-parser = argparse.ArgumentParser(description='''InstaTorCloud -- Get a
+parser = argparse.ArgumentParser(description='''InstaTorCloud -- Launch a
                                      Tor Bridge running on an EC2 instance in
                                      a single command.''')
 
@@ -26,8 +26,8 @@ parser.add_argument('--security-group', '-secgrp', action='store',
 
 parser.add_argument('--keypair', '-kp', action='store', dest='keypair',
                     help='''Trys to use the keypair selected, if it does not
-                    exist, creates it.  (Defaults to ~/.ssh/tor-cloud-servers.pem
-                    if nothing is inputted.)''')
+                    exist, creates it.  (Defaults to
+                    ~/.ssh/tor-cloud-servers.pem)''')
 
 parser.add_argument('--user-data', '-ud', action='store', dest='userdata',
                     help='''Auto-run a script when the instance starts. 
@@ -44,30 +44,30 @@ bridge_type.add_argument('--normal', '-nrml', action='store_true',
 
 instance_type = parser.add_mutually_exclusive_group()
 instance_type.add_argument('--micro', action='store_true', dest='micro',
-                           help='''Micro Instance Type. (Default)''')
+                           help='''Instance Type: Micro (Default)''')
 instance_type.add_argument('--small', action='store_true', dest='small',
-                           help='''Small Instance Type.''')
+                           help='''Instance Type: Small ''')
 instance_type.add_argument('--hcpumedium', action='store_true', 
-                           dest='highmed', help='''High-CPU Medium Instance
-                           Type.''')
+                           dest='highmed', help='''Instance Type:
+                           High-CPU Medium''')
 instance_type.add_argument('--medium', action='store_true', dest='med',
-                           help='''Medium Instance Type.''')
+                           help='''Instance Type: Medium''')
 
 ami = parser.add_mutually_exclusive_group()
 ami.add_argument('--us-east-1', '-use1', action='store_true', dest='use1',
-                 help='''Virginia (Default)''')
+                 help='''Region: Virginia (Default)''')
 ami.add_argument('--us-west-1', '-usw1', action='store_true', dest='usw1',
-                 help='''North California''')
+                 help='''Region: North California''')
 ami.add_argument('--us-west-2', '-usw2', action='store_true', dest='usw2',
-                 help='''Oregon''')
+                 help='''Region: Oregon''')
 ami.add_argument('--eu-west-1', '-euw1', action='store_true', dest='euw1',
-                 help='''Ireland''')
+                 help='''Region: Ireland''')
 ami.add_argument('--ap-northeast-1', '-apne1', action='store_true', dest='apne1',
-                 help='''Tokyo''')
+                 help='''Region: Tokyo''')
 ami.add_argument('--ap-southeast-1', '-apse1', action='store_true', dest='apse1',
-                 help='''Singapore''')
+                 help='''Region: Singapore''')
 ami.add_argument('--sa-east-1', '-sae1', action='store_true', dest='sae1',
-                 help='''Sao Paulo''')
+                 help='''Region: Sao Paulo''')
 
 Args = parser.parse_args()
 

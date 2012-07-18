@@ -16,6 +16,7 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 import argparse
+import time
 from os import path
 import sys
 
@@ -27,17 +28,17 @@ from args import Args
 ###
 #   Functions
 ###
-def launch_instance(ec2,
-                    instance_type,
-                    ami,
-                    group_name='tor-cloud-servers',
-                    key_name='tor-cloud-servers',
-                    key_extension='.pem',
-                    key_dir='~/.ssh',
-                    ssh_port=22,
-                    cidr='0.0.0.0/0',
-                    user_data=None,
-                    ssh_passwd=None):
+def launch_bridge(ec2,
+                  instance_type,
+                  ami,
+                  group_name='tor-cloud-servers',
+                  key_name='tor-cloud-servers',
+                  key_extension='.pem',
+                  key_dir='~/.ssh',
+                  ssh_port=22,
+                  cidr='0.0.0.0/0',
+                  user_data=None,
+                  ssh_passwd=None):
     '''
     The main function of this application. Will look extremely
     familiar to anyone who has read 'Python and AWS' by Mitch Garnatt.
@@ -63,12 +64,18 @@ def launch_instance(ec2,
             raise
 
     try:
-        group.authorize('https', ssh_port, ssh_port, cidr)
+        group.authorize('tcp', ssh_port, ssh_port, cidr)
     except ec2.ResponseError, e:
         if e.code == 'InvalidPermission.Duplicate':
-            print 'Security Group: %s already authorized' % group_name
+            print '%s already has a SSH rule.' % group_name
         else:
             raise
+
+    try:
+        group.authorize('tcp', 443, 443, cidr)
+    except ec2.ResponseError, e:
+        if e.code == 'InvalidPermission.Duplicate':
+            print '%s already has a HTTPS rule.' % group_name
 
     reservation = ec2.run_instances(ami,
                                     key_name=key_name,
@@ -124,7 +131,6 @@ def get_ami(Args):
             return 'ami-4e6eb627'
     else:
         return 'ami-4e6eb627'
-    
 
 def get_type(Args):
     '''
@@ -153,9 +159,9 @@ if __name__ == '__main__':
     instance_type = get_type(Args)
     ami = get_ami(Args)
 
-    instance = launch_instance(ec2=ec2, 
-                               instance_type=instance_type,
-                               ami=ami)
+    instance = launch_bridge(ec2=ec2,
+                             instance_type=instance_type,
+                             ami=ami)
     if instance:
         print "Your " + instance.instance_type + " instance is running!"
         print "IP:", instance.ip_address
