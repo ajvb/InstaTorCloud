@@ -148,12 +148,14 @@ def get_type(Args):
 
 if __name__ == '__main__':
     try:
-        ec2 = boto.connect_ec2()
-    except boto.exception.NoAuthHandlerFound:    
-        pass
-    try:
         ec2 = boto.connect_ec2(Args.akid, Args.sak)
+        ec2.get_all_instances()
     except:
+        print "\nUnable to connect to EC2 using your AWS keys."
+        print "Double check them. If you need some help check out:"
+        print "http://docs.amazonwebservices.com/AWSSecurityCredentials/1.0/AboutAWSCredentials.html#AccessKeys"
+        print "or"
+        print "http://goo.gl/fCVGi\n"
         sys.exit(1)
 
     instance_type = get_type(Args)
