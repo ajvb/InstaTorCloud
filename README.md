@@ -13,7 +13,8 @@ This will great a Normal Bridge on a t1.micro instance type in the east-1 (Virgi
 
 If you change the security group or the keypair to use, InstaTorCloud will check to see if it exists, and if it does not, it will create it for you.
 
-    python instatorcloud.py --access-key-id <ACCESS-KEY-ID> --secret-access-key <SECRET-ACCESS-KEY> --security-group mytorbridges --keypair ~/.ssh/mytorbridges
+    python instatorcloud.py --access-key-id <ACCESS-KEY-ID> --secret-access-key <SECRET-ACCESS-KEY> 
+    --security-group mytorbridges --keypair ~/.ssh/mytorbridges
 
 You can also change what region your bridge will be in, whether it will be a private or a normal bridge, and what instance type it will be on..
 
