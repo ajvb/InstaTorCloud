@@ -160,9 +160,24 @@ if __name__ == '__main__':
     instance_type = get_type(Args)
     ami = get_ami(Args)
 
+    if Args.keypair:
+        keyname = Args.keypair.split('/')[-1].split('.')[0]
+        keyextention = '.' + Args.keypair.split('.')[-1]
+        keydir = '/'.join(Args.keypair.split('/')[:-1])
+    else:
+        keyname = 'tor-cloud-servers'
+        keyextention = '.pem'
+        keydir = '~/.ssh'
+
+
     instance = launch_bridge(ec2=ec2,
                              instance_type=instance_type,
-                             ami=ami)
+                             ami=ami,
+                             group_name=Args.secgrp,
+                             key_name=keyname,
+                             key_extention=keyextention,
+                             key_dir=keydir,
+                             user_data=Args.user_data)
     if instance:
         print "Your " + instance.instance_type + " instance is running!"
         print "IP:", instance.ip_address

@@ -21,18 +21,18 @@ parser.add_argument('--security-group', '-secgrp', action='store',
                     dest='secgrp', help='''Name of the Security Group
                     you want to use for the instance. Checks to see if
                     it already exists, if it does not, creates it.
-                    (Defaults to 'tor-cloud-servers')
-                    ''')
+                    (Defaults to 'tor-cloud-servers')''',
+                    default="tor-cloud-servers")
 
 parser.add_argument('--keypair', '-kp', action='store', dest='keypair',
                     help='''Trys to use the keypair selected, if it does not
                     exist, creates it.  (Defaults to
                     ~/.ssh/tor-cloud-servers.pem)''')
 
-parser.add_argument('--user-data', '-ud', action='store', dest='userdata',
+parser.add_argument('--user-data', '-ud', action='store', dest='user_data',
                     help='''Auto-run a script when the instance starts. 
                     (Default is None. You usually don't need to mess with
-                    this)''')
+                    this)''', default=None)
 
 
 bridge_type = parser.add_mutually_exclusive_group()
