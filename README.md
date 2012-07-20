@@ -7,7 +7,7 @@ To run with the defaults,
 
 is all that is necessary.
 
-This will great a Normal Bridge on a t1.micro instance type in the east-1 (Virginia) region, and will create (or use) a keypair and security-group, both called _'tor-cloud-server'_.
+This will great a Normal Bridge on a t1.micro instance type in the east-1 (Virginia) region, and will create (or use) a keypair and security-group, both called _tor-cloud-server_.
 
 ---------
 
@@ -16,12 +16,12 @@ If you change the security group or the keypair to use, InstaTorCloud will check
     python instatorcloud.py --access-key-id <ACCESS-KEY-ID> --secret-access-key <SECRET-ACCESS-KEY> --security-group 
     mytorbridges --keypair ~/.ssh/mytorbridges
 
-You can also change what region your bridge will be in, whether it will be a private or a normal bridge, and what instance type it will be on..
+You can also change what region your bridge will be in, whether it will be a private or a normal bridge, and what instance type it will be on.
 
     python instatorcloud.py --access-key-id <ACCESS-KEY-ID> --secret-access-key <SECRET-ACCESS-KEY> --eu-west-1 --private 
     --medium
 
-And if you want, you can add it all together and even throw in a script to run once the instance has started. (Refered to as 'user_data'
+And if you want, you can add it all together and even throw in a script to run once the instance has started. (Refered to as 'user_data').
 
     python instatorcloud.py --access-key-id <ACCESS-KEY-ID> --secret-access-key <SECRET-ACCESS-KEY> --security-group 
     mytorbridges --keypair ~/.ssh/mytorbridges --eu-west-1 --private --medium --user-date myscript.sh

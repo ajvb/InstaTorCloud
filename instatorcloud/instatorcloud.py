@@ -17,7 +17,7 @@
 
 import argparse
 import time
-from os import path
+import os
 import sys
 
 import boto
@@ -145,6 +145,9 @@ def get_type(Args):
         return 't1.micro'
 
 
+      ############
+      ### Main ###
+      ############
 if __name__ == '__main__':
     try:
         ec2 = boto.connect_ec2(Args.akid, Args.sak)
@@ -161,9 +164,10 @@ if __name__ == '__main__':
     ami = get_ami(Args)
 
     if Args.keypair:
-        keyname = Args.keypair.split('/')[-1].split('.')[0]
-        keyextention = '.' + Args.keypair.split('.')[-1]
-        keydir = '/'.join(Args.keypair.split('/')[:-1])
+        thekey = os.path.split(Args.keypair)
+        keydir = thekey[0]
+        keyname = thekey[1].split('.')[0]
+        keyextention = '.' + thekey[1].split('.')[-1]
     else:
         keyname = 'tor-cloud-servers'
         keyextention = '.pem'

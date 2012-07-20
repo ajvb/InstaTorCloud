@@ -17,12 +17,11 @@ parser.add_argument('--secret-access-key', '-sak', action='store', dest='sak',
                     (More info here: http://goo.gl/fCVGi)''',
                     required=True)
 
-parser.add_argument('--security-group', '-secgrp', action='store',
+parser.add_argument('--security-group', action='store',
                     dest='secgrp', help='''Name of the Security Group
                     you want to use for the instance. Checks to see if
                     it already exists, if it does not, creates it.
-                    (Defaults to 'tor-cloud-servers')''',
-                    default="tor-cloud-servers")
+                    (Defaults to 'tor-cloud-servers')''')
 
 parser.add_argument('--keypair', '-kp', action='store', dest='keypair',
                     help='''Trys to use the keypair selected, if it does not
@@ -36,9 +35,9 @@ parser.add_argument('--user-data', '-ud', action='store', dest='user_data',
 
 
 bridge_type = parser.add_mutually_exclusive_group()
-bridge_type.add_argument('--private', '-prvt', action='store_true',
+bridge_type.add_argument('--private', action='store_true',
                          dest='private', help='''Creates a Private Bridge.''')
-bridge_type.add_argument('--normal', '-nrml', action='store_true',
+bridge_type.add_argument('--normal',  action='store_true',
                          dest='normal', help='''Creates a Normal Bridge. (Default)''')
 
 
@@ -54,19 +53,19 @@ instance_type.add_argument('--medium', action='store_true', dest='med',
                            help='''Instance Type: Medium''')
 
 ami = parser.add_mutually_exclusive_group()
-ami.add_argument('--us-east-1', '-use1', action='store_true', dest='use1',
+ami.add_argument('--us-east-1',  action='store_true', dest='use1',
                  help='''Region: Virginia (Default)''')
-ami.add_argument('--us-west-1', '-usw1', action='store_true', dest='usw1',
+ami.add_argument('--us-west-1',  action='store_true', dest='usw1',
                  help='''Region: North California''')
-ami.add_argument('--us-west-2', '-usw2', action='store_true', dest='usw2',
+ami.add_argument('--us-west-2',  action='store_true', dest='usw2',
                  help='''Region: Oregon''')
-ami.add_argument('--eu-west-1', '-euw1', action='store_true', dest='euw1',
+ami.add_argument('--eu-west-1', action='store_true', dest='euw1',
                  help='''Region: Ireland''')
-ami.add_argument('--ap-northeast-1', '-apne1', action='store_true', dest='apne1',
+ami.add_argument('--ap-northeast-1', action='store_true', dest='apne1',
                  help='''Region: Tokyo''')
-ami.add_argument('--ap-southeast-1', '-apse1', action='store_true', dest='apse1',
+ami.add_argument('--ap-southeast-1', action='store_true', dest='apse1',
                  help='''Region: Singapore''')
-ami.add_argument('--sa-east-1', '-sae1', action='store_true', dest='sae1',
+ami.add_argument('--sa-east-1', action='store_true', dest='sae1',
                  help='''Region: Sao Paulo''')
 
 Args = parser.parse_args()
