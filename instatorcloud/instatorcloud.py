@@ -44,6 +44,7 @@ def launch_bridge(ec2,
     '''
     try:
         key = ec2.get_all_key_pairs(keynames=[key_name])[0]
+        print 'Found keypair: %s' % key_name
     except ec2.ResponseError, e:
         if e.code == 'InvalidKeyPair.NotFound' :
             print 'Creating keypair: %s' % key_name
@@ -54,6 +55,7 @@ def launch_bridge(ec2,
 
     try:
         group = ec2.get_all_security_groups(groupnames=[group_name])[0]
+        print 'Found Security Group: %s' % group_name
     except ec2.ResponseError, e:
         if e.code == 'InvalidGroup.NotFound':
             print 'Creating Security Group: %s' % group_name
@@ -64,6 +66,7 @@ def launch_bridge(ec2,
 
     try:
         group.authorize('tcp', ssh_port, ssh_port, cidr)
+        print 'Authorized SSH'
     except ec2.ResponseError, e:
         if e.code == 'InvalidPermission.Duplicate':
             print '%s already has a SSH rule.' % group_name
@@ -72,6 +75,7 @@ def launch_bridge(ec2,
 
     try:
         group.authorize('tcp', 443, 443, cidr)
+        print 'Authorized HTTPS'
     except ec2.ResponseError, e:
         if e.code == 'InvalidPermission.Duplicate':
             print '%s already has a HTTPS rule.' % group_name
@@ -83,8 +87,9 @@ def launch_bridge(ec2,
                                     user_data=user_data)
     instance = reservation.instances[0]
 
+    print 'Starting instances'
     while instance.state != 'running' :
-        print '.'
+        print 'waiting...'
         time.sleep(5)
         instance.update()
 
@@ -167,10 +172,10 @@ if __name__ == '__main__':
         thekey = os.path.split(Args.keypair)
         keydir = thekey[0]
         keyname = thekey[1].split('.')[0]
-        keyextention = '.' + thekey[1].split('.')[-1]
+        keyextension = '.' + thekey[1].split('.')[-1]
     else:
         keyname = 'tor-cloud-servers'
-        keyextention = '.pem'
+        keyextension = '.pem'
         keydir = '~/.ssh'
 
 
@@ -179,7 +184,7 @@ if __name__ == '__main__':
                              ami=ami,
                              group_name=Args.secgrp,
                              key_name=keyname,
-                             key_extention=keyextention,
+                             key_extension=keyextension,
                              key_dir=keydir,
                              user_data=Args.user_data)
     if instance:
