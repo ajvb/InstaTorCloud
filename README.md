@@ -24,7 +24,7 @@ You can also change what region your bridge will be in, whether it will be a pri
 And if you want, you can add it all together and even throw in a script to run once the instance has started. (Refered to as 'user_data').
 
     python instatorcloud.py --access-key-id <ACCESS-KEY-ID> --secret-access-key <SECRET-ACCESS-KEY> --security-group 
-    mytorbridges --keypair ~/.ssh/mytorbridges --eu-west-1 --private --medium --user-date myscript.sh
+    mytorbridges --keypair ~/.ssh/mytorbridges --eu-west-1 --private --medium --user-data myscript.sh
 
 In full, the above command will create a Private bridge on a m1.medium instance type in the eu-west-1 (Ireland) region, use (or create) a key pair called _mytorbridges_ in ~/.ssh, use (or create) a security group called _mytorbridges_, and run a shell script called _myscript.sh_ once the instance has been successfully launched.
 
