@@ -40,14 +40,14 @@ def launch_bridge(ec2,
                   ssh_passwd=None):
     '''
     The main function of this application. Will look extremely
-    familiar to anyone who has read 'Python and AWS' by Mitch Garnatt.
+    familiar to anyone who has read 'Python and AWS' by Mitch Garnaat.
     '''
     try:
         key = ec2.get_all_key_pairs(keynames=[key_name])[0]
         print 'Found keypair: %s' % key_name
     except ec2.ResponseError, e:
         if e.code == 'InvalidKeyPair.NotFound' :
-            print 'Creating keypair: %s' % key_name
+            print 'Creating keypair: ', key_name
             key = ec2.create_key_pair(key_name)
             key.save(key_dir)
         else:
@@ -55,10 +55,10 @@ def launch_bridge(ec2,
 
     try:
         group = ec2.get_all_security_groups(groupnames=[group_name])[0]
-        print 'Found Security Group: %s' % group_name
+        print 'Found Security Group: ', group_name
     except ec2.ResponseError, e:
         if e.code == 'InvalidGroup.NotFound':
-            print 'Creating Security Group: %s' % group_name
+            print 'Creating Security Group: ', group_name
             group = ec2.create_security_group(group_name,
                                               'Security Group for Tor Nodes')
         else:
@@ -69,7 +69,7 @@ def launch_bridge(ec2,
         print 'Authorized SSH'
     except ec2.ResponseError, e:
         if e.code == 'InvalidPermission.Duplicate':
-            print '%s already has a SSH rule.' % group_name
+            print group_name, ' already has a SSH rule.'
         else:
             raise
 
@@ -78,7 +78,7 @@ def launch_bridge(ec2,
         print 'Authorized HTTPS'
     except ec2.ResponseError, e:
         if e.code == 'InvalidPermission.Duplicate':
-            print '%s already has a HTTPS rule.' % group_name
+            print group_name, ' already has a HTTPS rule.'
 
     reservation = ec2.run_instances(ami,
                                     key_name=key_name,
@@ -188,11 +188,11 @@ if __name__ == '__main__':
                              key_dir=keydir,
                              user_data=Args.user_data)
     if instance:
-        print "Your " + instance.instance_type + " instance is running!"
-        print "IP:", instance.ip_address
-        print "ID:", instance.id
-        print "Region:", instance.region
-        print "DNS name:", instance.dns_name
+        print "Your ", instance.instance_type, " instance is running!"
+        print "IP: ", instance.ip_address
+        print "ID: ", instance.id
+        print "Region: ", instance.region
+        print "DNS name: ", instance.dns_name
     else:
         print "something went horribly wrong....."
         sys.exit(1)

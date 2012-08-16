@@ -8,27 +8,27 @@ parser = argparse.ArgumentParser(description='''InstaTorCloud -- Launch a
 parser.add_argument('-v', '--version', action='version',
                      version='InstaTorCloud v0.1')
 
-parser.add_argument('--access-key-id', '-akid', action='store', dest='akid',
+parser.add_argument('--access-key-id', '-a', dest='akid',
                     help='''Where you must insert your AWS Access Key ID.
                     (More info here: http://goo.gl/fCVGi)''',
                     required=True)
-parser.add_argument('--secret-access-key', '-sak', action='store', dest='sak',
+parser.add_argument('--secret-access-key', '-s', dest='sak',
                     help='''Where you must insert your AWS Secret Access Key.
                     (More info here: http://goo.gl/fCVGi)''',
                     required=True)
 
-parser.add_argument('--security-group', action='store',
-                    dest='secgrp', help='''Name of the Security Group
+parser.add_argument('--security-group', dest='secgrp',
+                    help='''Name of the Security Group
                     you want to use for the instance. Checks to see if
                     it already exists, if it does not, creates it.
                     (Defaults to 'tor-cloud-servers')''')
 
-parser.add_argument('--keypair', '-kp', action='store', dest='keypair',
+parser.add_argument('--keypair', '-k', dest='keypair',
                     help='''Trys to use the keypair selected, if it does not
                     exist, creates it.  (Defaults to
                     ~/.ssh/tor-cloud-servers.pem)''')
 
-parser.add_argument('--user-data', '-ud', action='store', dest='user_data',
+parser.add_argument('--user-data', '-u', dest='user_data',
                     help='''Auto-run a script when the instance starts. 
                     (Default is None. You usually don't need to mess with
                     this)''', default=None)
