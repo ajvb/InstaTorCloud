@@ -25,7 +25,7 @@ import boto
 from args import Args
 
 ###
-#   Functions
+#   Functions.
 ###
 def launch_bridge(ec2,
                   instance_type,
