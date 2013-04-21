@@ -1,5 +1,6 @@
 #InstaTorCloud
 #### Launch a Tor Bridge running on an EC2 instance in a single command.
+####Make sure to check out https://cloud.torproject.org
 
 To run with the defaults,
 
