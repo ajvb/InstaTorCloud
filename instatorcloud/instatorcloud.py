@@ -79,6 +79,20 @@ def launch_bridge(ec2,
     except ec2.ResponseError, e:
         if e.code == 'InvalidPermission.Duplicate':
             print group_name, ' already has a HTTPS rule.'
+    
+    try:
+        group.authorize('tcp', 40872, 40872, cidr)
+        print 'Authorized 40872'
+    except ec2.ResponseError, e:
+        if e.code == 'InvalidPermission.Duplicate':
+            print group_name, ' already has a 40872 rule.'
+    
+    try:
+        group.authorize('tcp', 52176, 52176, cidr)
+        print 'Authorized 52176'
+    except ec2.ResponseError, e:
+        if e.code == 'InvalidPermission.Duplicate':
+            print group_name, ' already has a 52176 rule.'
 
     reservation = ec2.run_instances(ami,
                                     key_name=key_name,
