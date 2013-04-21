@@ -8,7 +8,7 @@ To run with the defaults,
 
 is all that is necessary.
 
-This will great a Normal Bridge on a t1.micro instance type in the east-1 (Virginia) region, and will create (or use) a keypair and security-group, both called _tor-cloud-server_.
+This will create a Normal Bridge on a t1.micro instance type in the east-1 (Virginia) region, and will create (or use) a keypair and security-group, both called _tor-cloud-server_.
 
 ---------
 
