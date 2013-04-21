@@ -12,6 +12,7 @@ parser.add_argument('--access-key-id', '-a', dest='akid',
                     help='''Where you must insert your AWS Access Key ID.
                     (More info here: http://goo.gl/fCVGi)''',
                     required=True)
+
 parser.add_argument('--secret-access-key', '-s', dest='sak',
                     help='''Where you must insert your AWS Secret Access Key.
                     (More info here: http://goo.gl/fCVGi)''',
@@ -37,8 +38,8 @@ parser.add_argument('--user-data', '-u', dest='user_data',
 bridge_type = parser.add_mutually_exclusive_group()
 bridge_type.add_argument('--private', action='store_true',
                          dest='private', help='''Creates a Private Bridge.''')
-bridge_type.add_argument('--normal',  action='store_true',
-                         dest='normal', help='''Creates a Normal Bridge. (Default)''')
+bridge_type.add_argument('--obfsproxy',  action='store_true',
+                         dest='normal', help='''Creates a Obfsproxy Bridge. (Default)''')
 
 
 instance_type = parser.add_mutually_exclusive_group()
@@ -67,6 +68,8 @@ ami.add_argument('--ap-southeast-1', action='store_true', dest='apse1',
                  help='''Region: Singapore''')
 ami.add_argument('--sa-east-1', action='store_true', dest='sae1',
                  help='''Region: Sao Paulo''')
+ami.add_argument('--ap-southeast-2', action='store_true', dest='apse2',
+                 help='''Region: Sydney''')
 
 Args = parser.parse_args()
 

@@ -101,40 +101,44 @@ def get_ami(Args):
     '''
     if Args.private:
         if Args.use1:
-            return 'ami-8467bfed'
+            return 'ami-567c1a3f'
         elif Args.usw1:
-            return 'ami-63207b26'
+            return 'ami-1aecc05f'
         elif Args.usw2:
-            return 'ami-baf27e8a'
+            return 'ami-d29403e2'
         elif Args.euw1:
-            return 'ami-f5390281'
+            return 'ami-22011556'
         elif Args.apne1:
-            return 'ami-78e05079'
+            return 'ami-0a1c9e0b'
         elif Args.apse1:
-            return 'ami-e63472b4'
+            return 'ami-601c5332'
         elif Args.sae1:
-            return 'ami-c4a07ed9'
+            return 'ami-6bd30976'
+        elif Args.apse2:
+            return 'ami-0e920234'
         else:
-            return 'ami-8467bfed'
+            return 'ami-567c1a3f'
     elif Args.normal:
         if Args.use1:
-            return 'ami-4e6eb627'
+            return 'ami-4a7c1a23'
         elif Args.usw1:
-            return 'ami-892378cc'
+            return 'ami-18ecc05d'
         elif Args.usw2:
-            return 'ami-24f27e14'
+            return 'ami-d09403e0'
         elif Args.euw1:
-            return 'ami-6d447f19'
+            return 'ami-20011554'
         elif Args.apne1:
-            return 'ami-78ff4f79'
+            return 'ami-061c9e07'
         elif Args.apse1:
-            return 'ami-e45016b6'
+            return 'ami-621c5330'
         elif Args.sae1:
-            return 'ami-b4a07ea9'
+            return 'ami-69d30974'
+        elif Args.apse2:
+            return 'ami-08920232'
         else:
-            return 'ami-4e6eb627'
+            return 'ami-4a7c1a23'
     else:
-        return 'ami-4e6eb627'
+        return 'ami-4a7c1a23'
 
 def get_type(Args):
     '''
@@ -155,7 +159,10 @@ def get_type(Args):
       ############
 if __name__ == '__main__':
     try:
-        ec2 = boto.connect_ec2(Args.akid, Args.sak)
+        try:
+            ec2 = boto.connect_ec2()
+        except:
+            ec2 = boto.connect_ec2(Args.akid, Args.sak)
         ec2.get_all_instances()
     except:
         print "\nUnable to connect to EC2 using your AWS keys."
@@ -179,10 +186,14 @@ if __name__ == '__main__':
         keydir = '~/.ssh'
 
 
+    if Args.secgrp:
+        secgrp = Args.secgrp
+    else:
+        secgrp = 'tor-cloud-servers'
     instance = launch_bridge(ec2=ec2,
                              instance_type=instance_type,
                              ami=ami,
-                             group_name=Args.secgrp,
+                             group_name=secgrp,
                              key_name=keyname,
                              key_extension=keyextension,
                              key_dir=keydir,
